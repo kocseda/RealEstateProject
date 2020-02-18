@@ -1,0 +1,96 @@
+﻿@model EmlakProjesi.Models.Konut
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <div class="card bg-secondary shadow border-0">
+            <div class="card-body px-lg-5 py-lg-5">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group focused">
+                        <!--  while creating a property (Konut) user should select if that property belongs to an agent (Isyeri) or a customer (Musteri)  -->
+                        <label class="form-control-label">Konut Sahibi</label>
+                        <select onchange="changeType(this);" class="form-control form-control-alternative">
+                            <option value='agent'>Emlakçı</option>
+                            <option value='customer'>Müşteri</option>
+                        </select>
+                    </div>
+                    <div id="agent" class="form-group focused">
+                        <label asp-for="IsyeriId" class="form-control-label"></label>
+                        <select id="agent-select" asp-for="IsyeriId" class="form-control form-control-alternative" asp-items="ViewBag.IsyeriId"></select>
+                    </div>
+
+                    <div id="customer" class="form-group focused">
+                        <label asp-for="MusteriId" class="form-control-label"></label>
+                        <select id="customer-select" asp-for="MusteriId" class="form-control form-control-alternative" asp-items="ViewBag.MusteriId"></select>
+                    </div>
+
+                    <div class="form-group focused">
+                        <label asp-for="EmlakTuru" class="form-control-label"></label>
+                        <input asp-for="EmlakTuru" class="form-control form-control-alternative" />
+                        <span asp-validation-for="EmlakTuru" class="text-danger"></span>
+                    </div>
+                    <div class="form-group focused">
+                        <label asp-for="Alan" class="form-control-label"></label>
+                        <input asp-for="Alan" class="form-control form-control-alternative" />
+                        <span asp-validation-for="Alan" class="text-danger"></span>
+                    </div>
+                    <div class="form-group focused">
+                        <label asp-for="OdaSayisi" class="form-control-label"></label>
+                        <input asp-for="OdaSayisi" class="form-control form-control-alternative" />
+                        <span asp-validation-for="OdaSayisi" class="text-danger"></span>
+                    </div>
+                    <div class="form-group focused">
+                        <label asp-for="KatNo" class="form-control-label"></label>
+                        <input asp-for="KatNo" class="form-control form-control-alternative" />
+                        <span asp-validation-for="KatNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group focused">
+                        <label asp-for="IsinmaTuru" class="form-control-label"></label>
+                        <input asp-for="IsinmaTuru" class="form-control form-control-alternative" />
+                        <span asp-validation-for="IsinmaTuru" class="text-danger"></span>
+                    </div>
+                    <div class="form-group focused">
+                        <label asp-for="SatisFiyati" class="form-control-label"></label>
+                        <input asp-for="SatisFiyati" class="form-control form-control-alternative" />
+                        <span asp-validation-for="SatisFiyati" class="text-danger"></span>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary mt-4" type="submit">Oluştur</button>
+                    </div>
+                    <div>
+                        <a asp-action="Index">Geri</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- if property (Konut) is owned by an agent (Isyeri) show agent info. or else show customer (Musteri) info.
+    create the property (Konut) with either MusteriId or IsyeriId.  -->
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $("#agent").show();
+        $("#customer").hide();
+        document.getElementById("agent-select").value = "";
+        document.getElementById("customer-select").value = "";
+        function changeType(obj) {
+            if (obj.value == "agent") {
+                $("#agent").show();
+                $("#customer").hide();
+                document.getElementById("customer-select").value = "";
+            }
+            if (obj.value == "customer") {
+                $("#agent").hide();
+                $("#customer").show();
+                document.getElementById("agent-select").value = "";
+            }
+        }
+    </script>
+}

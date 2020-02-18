@@ -1,0 +1,94 @@
+﻿@model IEnumerable<EmlakProjesi.Models.Konut>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col">
+        <div class="card shadow">
+            <div class="card-header border-0">
+                <div class="text-center" style="padding-bottom:15px; text-align:left!important;">
+                    <a asp-action="Create"><button class="btn btn-primary mt-4" style="font-size:0.7rem; padding:0.54rem 1rem; border-radius:0.275rem;">Yeni</button></a>
+                </div>
+                <h3 class="mb-0">Konut Listesi</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EmlakTuru)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Alan)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OdaSayisi)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.KatNo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsinmaTuru)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SatisFiyati)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.OlusturmaTarihi)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Isyeri)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Musteri)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmlakTuru)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Alan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OdaSayisi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.KatNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IsinmaTuru)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SatisFiyati)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OlusturmaTarihi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Isyeri.Adres)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Musteri.Adres)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.KonutId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.KonutId">Details</a> |
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
